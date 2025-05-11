@@ -84,7 +84,7 @@ export default function Page() {
                         type="submit"
                         className="bg-primary-main hover:bg-primary-dark w-full cursor-pointer rounded p-2 text-white transition-colors duration-500"
                     >
-                        Login
+                        Signup
                     </button>
                     <p className="text-secondary-text pt-4 text-sm">
                         Already have an account?
