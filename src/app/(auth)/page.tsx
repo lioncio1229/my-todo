@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
+import PasswordField from "@/components/ui/password-field";
 
 export default function Login() {
     return (
@@ -17,7 +18,7 @@ export default function Login() {
                         Fill the below form to login
                     </h5>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2">
                     <label htmlFor="email" className="block font-medium">
                         Email
                     </label>
@@ -30,11 +31,10 @@ export default function Login() {
                     <label htmlFor="password" className="block font-medium">
                         Password
                     </label>
-                    <input
+                    <PasswordField
                         id="password"
-                        type="password"
                         placeholder="Enter password"
-                        className="text-primary-text w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
+                        className="text-primary-text absolute w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
                     />
                     <div className="flex justify-between">
                         <div className="flex items-center gap-2">
