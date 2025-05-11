@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
 import PasswordField from "@/components/ui/password-field";
 
-export default function Login() {
+export default function Page() {
     return (
         <form className="flex h-lvh items-center justify-center">
             <div className="w-full max-w-md space-y-6 px-4 lg:px-0">
@@ -19,23 +19,27 @@ export default function Login() {
                     </h5>
                 </div>
                 <div className="space-y-2">
-                    <label htmlFor="email" className="block font-medium">
-                        Email
-                    </label>
-                    <input
-                        id="email"
-                        type="email"
-                        placeholder="Enter email address"
-                        className="text-primary-text w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
-                    />
-                    <label htmlFor="password" className="block font-medium">
-                        Password
-                    </label>
-                    <PasswordField
-                        id="password"
-                        placeholder="Enter password"
-                        className="text-primary-text absolute w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
-                    />
+                    <div>
+                        <label htmlFor="email" className="block font-medium">
+                            Email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="Enter email address"
+                            className="text-primary-text w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password" className="block font-medium">
+                            Password
+                        </label>
+                        <PasswordField
+                            id="password"
+                            placeholder="Enter password"
+                            className="text-primary-text absolute w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
+                        />
+                    </div>
                     <div className="flex justify-between">
                         <div className="flex items-center gap-2">
                             <input
@@ -69,8 +73,8 @@ export default function Login() {
                     <p className="text-secondary-text pt-4 text-sm">
                         Don't have an account yet?{" "}
                         <Link
-                            href="#"
-                            className="text-secondary-dark font-medium hover:underline"
+                            href="/signup"
+                            className="text-secondary-dark pl-1 font-medium hover:underline"
                         >
                             Sign up here
                         </Link>
