@@ -7,7 +7,7 @@ export default function Layout({
 }>) {
     return (
         <div className="flex">
-            <div className="relative flex h-lvh flex-1/2 shrink-0 grow flex-col justify-center gap-4">
+            <div className="relative hidden h-lvh flex-1/2 shrink-0 grow flex-col justify-center gap-4 lg:flex">
                 <div className="absolute top-0 z-[-100] h-full w-full bg-linear-45 from-transparent to-fuchsia-300 opacity-20"></div>
                 <div className="to-primary-main/25 absolute top-0 z-[-100] h-full w-full bg-linear-to-t from-white"></div>
                 <div className="flex w-full flex-col items-center justify-center gap-1 px-4 xl:flex-row">
@@ -27,13 +27,15 @@ export default function Layout({
                         </p>
                     </div>
                 </div>
-                <Image
-                    src="/dashboard.png"
-                    alt="Dashboard"
-                    width={1496}
-                    height={896}
-                    className="h-auto w-[800px] pr-12"
-                />
+                <div className="pr-4">
+                    <Image
+                        src="/dashboard.png"
+                        alt="Dashboard"
+                        width={1496}
+                        height={896}
+                        className="shadow-primary-main/10 h-auto w-[800px] rounded-lg shadow-[0_-4px_10px]"
+                    />
+                </div>
             </div>
             <div className="h-lvh flex-1/2 shrink-0 grow">{children}</div>
         </div>

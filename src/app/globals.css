@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-    --color-primary-main: #117dd7;
-    --color-secondary-main: "#FFBB00";
-    --color-title-text: "#151515";
+    --color-primary-main: #0b6dc5;
+    --color-primary-dark: #0d60a6;
+    --color-primary-light: #1f9ef8;
+    --color-secondary-main: #ffbb00;
+    --color-secondary-dark: #e5a800;
+    --color-title-text: #151515;
     --color-primary-text: #333333;
-    --color-secondary-text: "#838383";
+    --color-secondary-text: #838383;
 }
 
 @layer base {
@@ -16,7 +19,8 @@
     h5,
     h6,
     p,
-    span {
+    span,
+    label {
         color: var(--color-primary-text);
     }
     h1 {
@@ -36,5 +40,29 @@
     }
     h6 {
         font-size: var(--text-xs);
+    }
+}
+
+@utility checkbox-* {
+    height: calc(var(--spacing) * 5);
+    width: calc(var(--spacing) * 5);
+    appearance: none;
+    border-radius: var(--radius-sm);
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+    border-color: var(--color-gray-200);
+    position: relative;
+    cursor: pointer;
+    &:checked {
+        background-color: --value(--color- *);
+        border-color: --value(--color- *);
+    }
+    &:checked::after {
+        content: "";
+        background-image: url("/checkmark.svg");
+        width: calc(var(--spacing) * 4);
+        height: calc(var(--spacing) * 4);
+        position: absolute;
+        top: 0;
     }
 }
