@@ -24,9 +24,9 @@ type Props = Omit<
 };
 
 export default function Button({
-    variant,
-    color,
-    size,
+    variant = "contained",
+    color = "primary",
+    size = "medium",
     disabled,
     loading,
     fullWidth = true,
@@ -82,8 +82,8 @@ export default function Button({
             {...rest}
             className={clsx(
                 baseClasses,
-                mapClass[variant || "contained"][color || "primary"],
-                size ? sizeClasses[size] : sizeClasses.medium,
+                mapClass[variant][color],
+                sizeClasses[size],
                 { "w-full": fullWidth },
             )}
             disabled={disabled || loading}

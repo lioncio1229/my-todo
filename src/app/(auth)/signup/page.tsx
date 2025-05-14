@@ -42,29 +42,16 @@ export default function Page() {
                             className="text-primary-text w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
                         />
                     </div>
-                    <div>
-                        <label htmlFor="password" className="block font-medium">
-                            Password
-                        </label>
-                        <PasswordField
-                            id="password"
-                            placeholder="Enter password"
-                            className="text-primary-text absolute w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="confirm-password"
-                            className="block font-medium"
-                        >
-                            Confirm Password
-                        </label>
-                        <PasswordField
-                            id="confirm-password"
-                            placeholder="Confirm Password"
-                            className="text-primary-text absolute w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
-                        />
-                    </div>
+                    <PasswordField
+                        id="password"
+                        placeholder="Enter password"
+                        label="Password"
+                    />
+                    <PasswordField
+                        id="confirm-password"
+                        placeholder="Confirm password"
+                        label="Confirm Password"
+                    />
                     <div className="flex items-center gap-2">
                         <input
                             id="remember-me"

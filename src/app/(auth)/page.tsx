@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
 import Button from "@/components/ui/button";
+import Textfield from "@/components/ui/textfield";
 import PasswordField from "@/components/ui/password-field";
 
 export default function Page() {
@@ -19,28 +20,19 @@ export default function Page() {
                         Fill the below form to login
                     </h5>
                 </div>
-                <div className="space-y-2">
-                    <div>
-                        <label htmlFor="email" className="block font-medium">
-                            Email
-                        </label>
-                        <input
-                            id="email"
-                            type="email"
-                            placeholder="Enter email address"
-                            className="text-primary-text w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="password" className="block font-medium">
-                            Password
-                        </label>
-                        <PasswordField
-                            id="password"
-                            placeholder="Enter password"
-                            className="text-primary-text absolute w-full rounded-sm border-2 border-gray-200 p-2 outline-blue-300 placeholder:font-light placeholder:text-gray-300"
-                        />
-                    </div>
+                <div className="space-y-4">
+                    <Textfield
+                        id="email"
+                        type="email"
+                        placeholder="Enter email address"
+                        label="Email"
+                        variant="outlined"
+                    />
+                    <PasswordField
+                        id="password"
+                        placeholder="Enter password"
+                        label="Password"
+                    />
                     <div className="flex justify-between">
                         <div className="flex items-center gap-2">
                             <input

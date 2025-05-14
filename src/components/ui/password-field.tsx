@@ -2,31 +2,33 @@
 
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import Textfield, { TextfieldProps } from "./textfield";
+import IconButton from "./icon-button";
 
-type Props = Partial<React.InputHTMLAttributes<HTMLInputElement>>;
+type Props = TextfieldProps & {
+    error?: string;
+};
 
 export default function PasswordField(props: Props) {
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     return (
-        <div className="relative h-[43px]">
-            <input
-                id={props.id}
-                type={passwordVisible ? "text" : "password"}
-                placeholder={props.placeholder}
-                {...props}
-            />
-            <button
-                type="button"
-                className="absolute top-[50%] right-2 translate-y-[-50%] cursor-pointer rounded-full p-2 hover:bg-gray-100"
-                onClick={() => setPasswordVisible(!passwordVisible)}
-            >
-                {passwordVisible ? (
-                    <EyeOff size={20} className="text-secondary-text" />
-                ) : (
-                    <Eye size={20} className="text-secondary-text" />
-                )}
-            </button>
-        </div>
+        <Textfield
+            id={props.id}
+            variant="outlined"
+            type={passwordVisible ? "text" : "password"}
+            {...props}
+            inputAdornment={
+                <IconButton
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                >
+                    {passwordVisible ? (
+                        <Eye className="text-secondary-text size-[20px]" />
+                    ) : (
+                        <EyeOff className="text-secondary-text size-[20px]" />
+                    )}
+                </IconButton>
+            }
+        />
     );
 }
