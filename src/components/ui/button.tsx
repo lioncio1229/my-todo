@@ -21,6 +21,8 @@ type Props = Omit<
     size?: Size;
     loading?: boolean;
     fullWidth?: boolean;
+    startIcon?: React.ReactNode;
+    endIcon?: React.ReactNode;
 };
 
 export default function Button({
@@ -31,12 +33,11 @@ export default function Button({
     loading,
     fullWidth = true,
     onClick,
+    startIcon,
+    endIcon,
     children,
     ...rest
 }: Props) {
-    const baseClasses =
-        "cursor-pointer rounded p-2 transition-colors duration-500";
-
     const mapClass = {
         contained: {
             primary: "bg-primary-main hover:bg-primary-dark text-white",
@@ -50,24 +51,30 @@ export default function Button({
             secondaryText: "bg-gray-100 hover:bg-gray-200 text-secondary-text",
         },
         outlined: {
-            primary: "border-1 border-primary-main text-primary-main",
-            secondary: "border-1 border-secondary-main text-secondary-main",
-            success: "border-1 border-green-600 text-green-600",
-            error: "border-1 border-red-500 text-red-600",
-            warning: "border-1 border-amber-400 text-amber-400",
-            info: "border-1 border-blue-500 text-blue-500",
-            primaryText: "border-1 border-gray-200 text-primary-text",
-            secondaryText: "border-1 border-gray-100 text-secondary-text",
+            primary:
+                "border-1 border-primary-main text-primary-main hover:bg-primary-main/10",
+            secondary:
+                "border-1 border-secondary-main text-secondary-main hover:bg-secondary-main/10",
+            success:
+                "border-1 border-green-600 text-green-600 hover:bg-green-600/10",
+            error: "border-1 border-red-500 text-red-600 hover:bg-red-500/10",
+            warning:
+                "border-1 border-amber-400 text-amber-400 hover:bg-amber-400/10",
+            info: "border-1 border-blue-500 text-blue-500 hover:bg-blue-500/10",
+            primaryText:
+                "border-1 border-gray-200 text-primary-text hover:bg-gray-100",
+            secondaryText:
+                "border-1 border-gray-100 text-secondary-text hover:bg-gray-100",
         },
         text: {
-            primary: "text-primary-main",
-            secondary: "text-secondary-main",
-            success: "text-green-600",
-            error: "text-red-500",
-            warning: "text-amber-400",
-            info: "text-blue-500",
-            primaryText: "text-primary-text",
-            secondaryText: "text-secondary-text",
+            primary: "text-primary-main hover:bg-primary-main/5",
+            secondary: "text-secondary-main hover:bg-secondary-main/5",
+            success: "text-green-600 hover:bg-green-600/5",
+            error: "text-red-500 hover:bg-red-500/5",
+            warning: "text-amber-400 hover:bg-amber-400/5",
+            info: "text-blue-500 hover:bg-blue-500/5",
+            primaryText: "text-primary-text hover:bg-gray-100",
+            secondaryText: "text-secondary-text hover:bg-gray-50",
         },
     };
 
@@ -81,7 +88,7 @@ export default function Button({
         <button
             {...rest}
             className={clsx(
-                baseClasses,
+                "flex cursor-pointer items-center justify-center gap-2 rounded p-2 transition-colors duration-500",
                 mapClass[variant][color],
                 sizeClasses[size],
                 { "w-full": fullWidth },
@@ -89,7 +96,9 @@ export default function Button({
             disabled={disabled || loading}
             onClick={onClick}
         >
-            {loading ? <span>Loading...</span> : children}
+            {startIcon}
+            {children}
+            {endIcon}
         </button>
     );
 }

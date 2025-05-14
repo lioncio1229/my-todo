@@ -6,5 +6,6 @@
         "class:list",
         ".*classes",
         ".*class"
-    ]
+    ],
+    "editor.formatOnSave": true
 }

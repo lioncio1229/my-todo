@@ -9,57 +9,13 @@ import {
     Settings,
     LogOut,
 } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import IconButton from "../ui/icon-button";
-import Divider from "../ui/divider";
+import IconButton from "../../ui/icon-button";
+import Divider from "../../ui/divider";
+import NavItem from "./nav-item";
+import TaskGroup from "./task-group";
 
-type SidebarListItemProps = {
-    href: string;
-    icon: React.ReactNode;
-    label: string;
-    count?: number;
-};
-
-function SidebarListItem({ href, icon, label, count }: SidebarListItemProps) {
-    const pathname = usePathname();
-    const isActive = pathname === href;
-
-    return (
-        <li>
-            <Link
-                href={href}
-                className={clsx(
-                    "flex items-center justify-between gap-2 rounded-sm p-2 text-gray-900 hover:bg-gray-100",
-                    {
-                        "bg-gray-200 font-semibold hover:bg-gray-200": isActive,
-                    },
-                )}
-            >
-                <div
-                    className={clsx("flex items-center gap-2", {
-                        "[&_svg]:text-primary-text": isActive,
-                    })}
-                >
-                    {icon}
-                    <span>{label}</span>
-                </div>
-                {count && (
-                    <div
-                        className={clsx("rounded-sm bg-gray-300 px-3", {
-                            "bg-white": isActive,
-                        })}
-                    >
-                        {count}
-                    </div>
-                )}
-            </Link>
-        </li>
-    );
-}
-
-const taskList: SidebarListItemProps[] = [
+const taskList = [
     {
         label: "Upcoming",
         href: "/main",
@@ -83,7 +39,7 @@ const taskList: SidebarListItemProps[] = [
     },
 ];
 
-const userPreferences: SidebarListItemProps[] = [
+const userPreferences = [
     {
         label: "Settings",
         href: "#",
@@ -97,8 +53,10 @@ const userPreferences: SidebarListItemProps[] = [
 ];
 
 export default function Sidebar() {
+    const pathname = usePathname();
+
     return (
-        <nav className="h-full w-full rounded-lg border-1 border-gray-300 bg-linear-45 from-[#F3F4F6]/0 to-[#FBFDFF] p-4">
+        <nav className="h-full w-full rounded-lg border-1 border-gray-200 bg-linear-45 from-[#F3F4F6]/0 to-[#FBFDFF] p-4">
             <div className="flex h-full w-full flex-col gap-6">
                 <div className="flex justify-between">
                     <h2 className="font-semibold">Menu</h2>
@@ -110,15 +68,27 @@ export default function Sidebar() {
                     <h4 className="py-2 font-medium">TASK</h4>
                     <ul className="flex flex-col gap-2">
                         {taskList.map((item) => (
-                            <SidebarListItem key={item.label} {...item} />
+                            <NavItem
+                                key={item.label}
+                                {...item}
+                                active={item.href === pathname}
+                            />
                         ))}
                     </ul>
                 </div>
                 <Divider />
+                <div>
+                    <h4 className="py-2 font-medium">LIST</h4>
+                    <TaskGroup />
+                </div>
                 <div className="mt-auto">
                     <ul className="flex flex-col gap-2">
                         {userPreferences.map((item) => (
-                            <SidebarListItem key={item.label} {...item} />
+                            <NavItem
+                                key={item.label}
+                                {...item}
+                                active={item.href === pathname}
+                            />
                         ))}
                     </ul>
                 </div>

@@ -15,6 +15,7 @@ export type TextfieldProps = Omit<
     InputAdornmentWrapper?: React.ElementType<{ children: React.ReactNode }>;
     inputAdornment?: React.ReactNode;
     inputAdornmentPosition?: "start" | "end";
+    outlineWidth?: "thick" | "thin";
 };
 
 function DefaultInputAdornmentWrapper({
@@ -37,6 +38,7 @@ export default function Textfield({
     InputAdornmentWrapper = DefaultInputAdornmentWrapper,
     inputAdornment,
     inputAdornmentPosition = "end",
+    outlineWidth = "thick",
     ...rest
 }: TextfieldProps) {
     return (
@@ -44,9 +46,14 @@ export default function Textfield({
             {label && (
                 <label
                     htmlFor={rest.id}
-                    className={clsx("block font-medium", {
-                        "font-normal text-red-500": error,
-                    })}
+                    className={clsx(
+                        "block font-medium",
+                        {
+                            "font-normal text-red-500": error,
+                        },
+                        { "text-sm": variantSize === "small" },
+                        { "text-base": variantSize === "large" },
+                    )}
                 >
                     {label}
                 </label>
@@ -56,12 +63,28 @@ export default function Textfield({
                     "flex items-center overflow-hidden",
                     { "flex-row-reverse": inputAdornmentPosition === "start" },
                     {
-                        "rounded-sm border-2 border-gray-200 has-[input:focus]:border-blue-300":
+                        "rounded-sm border-gray-200 has-[input:focus]:border-blue-300":
                             variant === "outlined",
                     },
                     {
-                        "border-b-2 border-gray-200 has-[input:focus]:border-blue-300":
+                        "border-gray-200 has-[input:focus]:border-blue-300":
                             variant === "standard",
+                    },
+                    {
+                        "border-2":
+                            variant === "outlined" && outlineWidth === "thick",
+                    },
+                    {
+                        "border-1":
+                            variant === "outlined" && outlineWidth === "thin",
+                    },
+                    {
+                        "border-b-2":
+                            variant === "standard" && outlineWidth === "thick",
+                    },
+                    {
+                        "border-b-1":
+                            variant === "standard" && outlineWidth === "thin",
                     },
                     { "border-red-500": error },
                     {
@@ -86,7 +109,13 @@ export default function Textfield({
                     : inputAdornment}
             </div>
             {error && (
-                <span className="block pt-1 text-sm font-light text-red-500">
+                <span
+                    className={clsx(
+                        "block pt-1 font-light text-red-500",
+                        { "text-xs": variantSize === "small" },
+                        { "text-sm": variantSize === "large" },
+                    )}
+                >
                     {error}
                 </span>
             )}
