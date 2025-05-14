@@ -10,7 +10,7 @@ export default function IconButton({
     return (
         <button
             type="button"
-            className="cursor-pointer rounded-full p-2 hover:bg-gray-100"
+            className="h-max w-max cursor-pointer rounded-full p-2 hover:bg-gray-100"
             onClick={onClick}
         >
             {children}

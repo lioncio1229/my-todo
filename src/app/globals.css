@@ -14,6 +14,9 @@
 }
 
 @layer base {
+    div,
+    ul,
+    ol,
     h1,
     h2,
     h3,
@@ -22,6 +25,7 @@
     h6,
     p,
     span,
+    a,
     label {
         color: var(--color-primary-text);
     }

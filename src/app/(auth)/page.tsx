@@ -6,7 +6,7 @@ import PasswordField from "@/components/ui/password-field";
 
 export default function Page() {
     return (
-        <form className="flex h-lvh items-center justify-center">
+        <form action="/main" className="flex h-lvh items-center justify-center">
             <div className="w-full max-w-md space-y-6 px-4 lg:px-0">
                 <div>
                     <div className="flex items-center gap-1">
