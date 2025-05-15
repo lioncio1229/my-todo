@@ -6,6 +6,8 @@ import NavItem from "./nav-item";
 import Button from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import Textfield from "@/components/ui/textfield";
+import { HexColorPicker } from "react-colorful";
+import Popper from "@/components/ui/popper";
 
 const groupList = [
     {
@@ -46,51 +48,72 @@ function AddGroup({
     onSave?: (formData: FormData) => void;
     onCancel?: () => void;
 }) {
+    const [colorPickerEl, setColorPickerEl] = useState<HTMLElement | null>();
+    const open = Boolean(colorPickerEl);
+
     return (
-        <form
-            action={onSave}
-            className="space-y-5 rounded border border-gray-200 p-2"
-        >
-            <Textfield
-                name="groupName"
-                variantSize="small"
-                outlineWidth="thin"
-                autoFocus
-            />
-            <div className="flex items-center justify-between gap-2">
-                {predefinedColors.map((color) => (
+        <>
+            <Popper anchorEl={colorPickerEl} open={open}>
+                <HexColorPicker />
+            </Popper>
+            <form
+                action={onSave}
+                className="space-y-5 rounded border border-gray-200 p-2"
+            >
+                <Textfield
+                    name="groupName"
+                    variantSize="small"
+                    outlineWidth="thin"
+                    autoFocus
+                />
+                <div className="flex items-center justify-between gap-2">
+                    {predefinedColors.map((color) => (
+                        <input
+                            key={color}
+                            type="radio"
+                            name="color"
+                            className={clsx(
+                                `size-[20px] rounded-sm ${color} cursor-pointer appearance-none checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
+                            )}
+                            aria-label={`Select color ${color}`}
+                        />
+                    ))}
                     <input
-                        key={color}
                         type="radio"
                         name="color"
                         className={clsx(
-                            `size-[20px] rounded-sm ${color} cursor-pointer appearance-none checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
+                            `size-[20px] cursor-pointer appearance-none rounded-sm bg-[url(/color-picker.svg)] bg-cover checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
                         )}
-                        aria-label={`Select color ${color}`}
-                    ></input>
-                ))}
-            </div>
-            <div className="flex items-center justify-end gap-2">
-                <Button
-                    type="button"
-                    variant="outlined"
-                    color="secondaryText"
-                    size="small"
-                    fullWidth={false}
-                    onClick={onCancel}
-                >
-                    Cancel
-                </Button>
-                <Button
-                    type="submit"
-                    color="primary"
-                    size="small"
-                    fullWidth={false}
-                >
-                    Save
-                </Button>
-            </div>
-        </form>
+                        aria-label={`Color picker`}
+                        onClick={(e) =>
+                            open
+                                ? setColorPickerEl(null)
+                                : setColorPickerEl(e.currentTarget)
+                        }
+                    />
+                </div>
+                <div className="flex items-center justify-end gap-2">
+                    <Button
+                        type="button"
+                        variant="outlined"
+                        color="secondaryText"
+                        size="small"
+                        fullWidth={false}
+                        onClick={onCancel}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        type="submit"
+                        color="primary"
+                        size="small"
+                        fullWidth={false}
+                    >
+                        Save
+                    </Button>
+                </div>
+            </form>
+        </>
     );
 }
 
