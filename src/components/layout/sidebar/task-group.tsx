@@ -53,7 +53,11 @@ function AddGroup({
 
     return (
         <>
-            <Popper anchorEl={colorPickerEl} open={open}>
+            <Popper
+                anchorEl={colorPickerEl}
+                open={open}
+                portalElement={document.getElementById("sidebar-wrapper")}
+            >
                 <HexColorPicker />
             </Popper>
             <form

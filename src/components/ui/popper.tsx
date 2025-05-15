@@ -6,24 +6,27 @@ import { useRef, useState, useLayoutEffect } from "react";
 type Props = {
     open?: boolean;
     anchorEl?: HTMLElement | null;
-    children?: React.ReactNode;
     placement?: "top" | "bottom" | "left" | "right";
     placementAlignment?: "start" | "end" | "center";
     placementOffset?: number;
+    portalElement?: HTMLElement | null;
+    children?: React.ReactNode;
 };
 
 export default function Popper({
     open = false,
     anchorEl,
-    placement = "right",
-    placementAlignment = "end",
+    placement = "bottom",
+    placementAlignment = "start",
     placementOffset = 8,
+    portalElement = null,
     children,
 }: Props) {
     const ref = useRef<HTMLDivElement>(null);
 
     const [rect, setRect] = useState({ x: 0, y: 0, width: 0, height: 0 });
     const [popperRect, setPopperRect] = useState({ width: 0, height: 0 });
+    const [viewportRect, setViewportRect] = useState({ width: 0, height: 0 });
 
     let posX = 0;
     let posY = 0;
@@ -55,7 +58,9 @@ export default function Popper({
     }
 
     useLayoutEffect(() => {
-        if (anchorEl) {
+        if (!anchorEl) return;
+
+        const handleDimensions = () => {
             const rect = anchorEl.getBoundingClientRect();
             setRect({
                 x: rect.left,
@@ -71,8 +76,26 @@ export default function Popper({
                     height: popperRect.height,
                 });
             }
-        }
-    }, [anchorEl]);
+
+            const viewportRect = document.body.getBoundingClientRect();
+            setViewportRect({
+                width: viewportRect.width,
+                height: viewportRect.height,
+            });
+        };
+
+        handleDimensions();
+
+        const resizerElement = portalElement || document.body;
+
+        resizerElement.addEventListener("resize", handleDimensions);
+        resizerElement.addEventListener("scroll", handleDimensions);
+
+        return () => {
+            resizerElement.removeEventListener("resize", handleDimensions);
+            resizerElement.removeEventListener("scroll", handleDimensions);
+        };
+    }, [anchorEl, portalElement]);
 
     return createPortal(
         <div
@@ -81,6 +104,6 @@ export default function Popper({
         >
             {open && children}
         </div>,
-        document.body,
+        portalElement || document.body,
     );
 }

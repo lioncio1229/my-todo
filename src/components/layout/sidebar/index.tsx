@@ -56,7 +56,7 @@ export default function Sidebar() {
     const pathname = usePathname();
 
     return (
-        <nav className="h-full w-full rounded-lg border-1 border-gray-200 bg-linear-45 from-[#F3F4F6]/0 to-[#FBFDFF] p-4">
+        <nav className="h-300 w-full rounded-lg border-1 border-gray-200 bg-linear-45 from-[#F3F4F6]/0 to-[#FBFDFF] p-4">
             <div className="flex h-full w-full flex-col gap-6">
                 <div className="flex justify-between">
                     <h2 className="font-semibold">Menu</h2>
