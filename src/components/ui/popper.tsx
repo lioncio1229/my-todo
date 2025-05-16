@@ -37,6 +37,7 @@ export default function Popper({
         let _popperRect: DOMRect;
         let _viewportHeightTemp = 0;
         let _viewportWidthTemp = 0;
+        const overflowOffset = 8;
 
         const isVerticalAlign = placement === "top" || placement === "bottom";
 
@@ -84,6 +85,52 @@ export default function Popper({
             style.top = `${posY}px`;
         };
 
+        const calculateOverflow = (posX: number, posY: number) => {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            const bottomBoundaryExceed =
+                posY + _popperRect.height + overflowOffset > viewportHeight;
+            const topBoundaryExceed = posY - overflowOffset < 0;
+
+            //Check if the popper is outside below the viewport
+            if (bottomBoundaryExceed) {
+                if (placement === "bottom") {
+                    posY = calculatePopperRawPosition(
+                        "top",
+                        placementAlignment,
+                    ).posY;
+                } else if (placement === "left" || placement === "right") {
+                    posY = calculatePopperRawPosition(placement, "end").posY;
+                } else {
+                    posY =
+                        viewportHeight - _popperRect.height - placementOffset;
+                }
+                posY = Math.min(
+                    posY,
+                    viewportHeight - _popperRect.height - placementOffset,
+                );
+            }
+
+            //Check if the popper is outside above the viewport
+            else if (topBoundaryExceed) {
+                if (placement === "top") {
+                    posY = calculatePopperRawPosition(
+                        "bottom",
+                        placementAlignment,
+                    ).posY;
+                } else if (placement === "left" || placement === "right") {
+                    posY = calculatePopperRawPosition(placement, "start").posY;
+                }
+                posY = Math.min(
+                    posY,
+                    viewportHeight - _popperRect.height - placementOffset,
+                );
+            }
+
+            return { posX, posY };
+        };
+
         const handleDimensions = () => {
             _targetRect = anchorEl.getBoundingClientRect();
             _popperRect = ref.current!.getBoundingClientRect();
@@ -111,36 +158,8 @@ export default function Popper({
                 placementAlignment,
             );
 
-            const bottomBoundaryExceed =
-                posY + _popperRect.height > viewportHeight;
-            const topBoundaryExceed = posY < 0;
-
-            //Check if the popper is outside below the viewport
-            if (bottomBoundaryExceed) {
-                if (placement === "bottom") {
-                    posY = calculatePopperRawPosition(
-                        "top",
-                        placementAlignment,
-                    ).posY;
-                } else if (placement === "left" || placement === "right") {
-                    posY = calculatePopperRawPosition(placement, "end").posY;
-                } else {
-                    posY =
-                        viewportHeight - _popperRect.height - placementOffset;
-                }
-            }
-
-            //Check if the popper is outside above the viewport
-            if (topBoundaryExceed) {
-                if (placement === "top") {
-                    posY = calculatePopperRawPosition(
-                        "bottom",
-                        placementAlignment,
-                    ).posY;
-                }
-            }
-
-            updatePopperDisplay(posX, posY);
+            const finalPosition = calculateOverflow(posX, posY);
+            updatePopperDisplay(finalPosition.posX, finalPosition.posY);
 
             _animationId = requestAnimationFrame(handleDimensions);
         };
