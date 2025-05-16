@@ -19,7 +19,7 @@ type Props = {
 export default function Popper({
     open = false,
     anchorEl,
-    placement = "bottom",
+    placement = "right",
     placementAlignment = "center",
     placementOffset = 8,
     popperBoundery = null,
@@ -89,12 +89,12 @@ export default function Popper({
             const viewportWidth = window.innerWidth;
             const viewportHeight = window.innerHeight;
 
-            const bottomBoundaryExceed =
-                posY + _popperRect.height + overflowOffset > viewportHeight;
-            const topBoundaryExceed = posY - overflowOffset < 0;
+            const bottomBoundaryExceed = () =>
+                posY + _popperRect.height + overflowOffset > window.innerHeight;
+            const topBoundaryExceed = () => posY - overflowOffset < 0;
 
             //Check if the popper is outside below the viewport
-            if (bottomBoundaryExceed) {
+            if (bottomBoundaryExceed()) {
                 if (placement === "bottom") {
                     posY = calculatePopperRawPosition(
                         "top",
@@ -113,7 +113,7 @@ export default function Popper({
             }
 
             //Check if the popper is outside above the viewport
-            else if (topBoundaryExceed) {
+            else if (topBoundaryExceed()) {
                 if (placement === "top") {
                     posY = calculatePopperRawPosition(
                         "bottom",
@@ -131,7 +131,7 @@ export default function Popper({
             return { posX, posY };
         };
 
-        const handleDimensions = () => {
+        const handleRenderPopper = () => {
             _targetRect = anchorEl.getBoundingClientRect();
             _popperRect = ref.current!.getBoundingClientRect();
 
@@ -144,7 +144,7 @@ export default function Popper({
                 _viewportWidthTemp === viewportWidth &&
                 _viewportHeightTemp === viewportHeight
             ) {
-                _animationId = requestAnimationFrame(handleDimensions);
+                _animationId = requestAnimationFrame(handleRenderPopper);
                 return;
             }
 
@@ -161,10 +161,10 @@ export default function Popper({
             const finalPosition = calculateOverflow(posX, posY);
             updatePopperDisplay(finalPosition.posX, finalPosition.posY);
 
-            _animationId = requestAnimationFrame(handleDimensions);
+            _animationId = requestAnimationFrame(handleRenderPopper);
         };
 
-        _animationId = requestAnimationFrame(handleDimensions);
+        _animationId = requestAnimationFrame(handleRenderPopper);
 
         return () => {
             cancelAnimationFrame(_animationId);
