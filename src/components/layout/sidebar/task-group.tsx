@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import clsx from "clsx";
 import NavItem from "./nav-item";
 import Button from "@/components/ui/button";
@@ -31,15 +31,41 @@ const groupList = [
 ];
 
 const predefinedColors = [
-    "bg-red-500",
-    "bg-orange-500",
-    "bg-yellow-500",
-    "bg-green-500",
-    "bg-blue-500",
-    "bg-purple-500",
-    "bg-pink-500",
-    "bg-indigo-500",
+    "#fb2d32",
+    "#fe6902",
+    "#f4b001",
+    "#00c94d",
+    "#287fff",
+    "#a947ff",
+    "#f1359d",
+    "#615fff",
 ];
+
+const defaultColorValue = predefinedColors[0] ?? "#287fff";
+
+function CustomColorPicker({
+    onPick,
+    onCancel,
+}: {
+    onPick?: (hex: string) => void;
+    onCancel?: () => void;
+}) {
+    const [color, setColor] = useState("#aabbcc");
+
+    return (
+        <div className="rounded-sm bg-white p-1 shadow-sm outline-1 outline-gray-200">
+            <HexColorPicker color={color} onChange={setColor} />
+            <div className="mt-2 flex gap-1">
+                <Button size="small" variant="outlined" onClick={onCancel}>
+                    Cancel
+                </Button>
+                <Button size="small" onClick={() => onPick?.(color)}>
+                    Pick
+                </Button>
+            </div>
+        </div>
+    );
+}
 
 function AddGroup({
     onSave,
@@ -48,6 +74,7 @@ function AddGroup({
     onSave?: (formData: FormData) => void;
     onCancel?: () => void;
 }) {
+    const radioRef = useRef<HTMLInputElement | null>(null);
     const [colorPickerEl, setColorPickerEl] = useState<HTMLElement | null>();
     const open = Boolean(colorPickerEl);
 
@@ -59,7 +86,14 @@ function AddGroup({
                 placement="right"
                 placementAlignment="center"
             >
-                <HexColorPicker />
+                <CustomColorPicker
+                    onPick={(hex) => {
+                        radioRef.current!.value = hex;
+                        radioRef.current!.checked = true;
+                        setColorPickerEl(null);
+                    }}
+                    onCancel={() => setColorPickerEl(null)}
+                />
             </Popper>
             <form
                 action={onSave}
@@ -70,6 +104,7 @@ function AddGroup({
                     variantSize="small"
                     outlineWidth="thin"
                     autoFocus
+                    autoComplete="off"
                 />
                 <div className="flex items-center justify-between gap-2">
                     {predefinedColors.map((color) => (
@@ -77,13 +112,17 @@ function AddGroup({
                             key={color}
                             type="radio"
                             name="color"
+                            defaultChecked={color === defaultColorValue}
+                            defaultValue={defaultColorValue}
+                            style={{ backgroundColor: color }}
                             className={clsx(
-                                `size-[20px] rounded-sm ${color} cursor-pointer appearance-none checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
+                                `size-[20px] cursor-pointer appearance-none rounded-sm checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
                             )}
                             aria-label={`Select color ${color}`}
                         />
                     ))}
                     <input
+                        ref={radioRef}
                         type="radio"
                         name="color"
                         className={clsx(
@@ -125,6 +164,17 @@ function AddGroup({
 export default function TaskGroup() {
     const [addGroupOpen, setAddGroupOpen] = useState(false);
 
+    const handleOnSave = (formData: FormData) => {
+        const groupName = formData.get("groupName");
+        const color = formData.get("color");
+        console.log("Group Name: ", groupName);
+        console.log("Color: ", color);
+
+        //TODO: Add data to database
+
+        setAddGroupOpen(false);
+    };
+
     return (
         <div>
             <ul className="pb-2">
@@ -149,7 +199,10 @@ export default function TaskGroup() {
                     Add new list
                 </Button>
             ) : (
-                <AddGroup onCancel={() => setAddGroupOpen(false)} />
+                <AddGroup
+                    onSave={handleOnSave}
+                    onCancel={() => setAddGroupOpen(false)}
+                />
             )}
         </div>
     );
