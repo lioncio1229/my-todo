@@ -103,7 +103,13 @@ export default function Popper({
                         placementAlignment,
                     ).posY;
                 } else if (placement === "left" || placement === "right") {
-                    posY = calculatePopperRawPosition(placement, "end").posY;
+                    posY = calculatePopperRawPosition(placement, "center").posY;
+                    if (bottomBoundaryExceed()) {
+                        posY = calculatePopperRawPosition(
+                            placement,
+                            "end",
+                        ).posY;
+                    }
                 } else {
                     posY =
                         viewportHeight - _popperRect.height - placementOffset;
