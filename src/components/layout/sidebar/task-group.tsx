@@ -19,15 +19,15 @@ const groupList = [
         label: "Today",
         icon: <div className="size-[20px] rounded-sm bg-blue-300"></div>,
     },
-    // {
-    //     label: "Calendar",
-    //     icon: <div className="size-[20px] rounded-sm bg-yellow-500"></div>,
-    //     count: 29,
-    // },
-    // {
-    //     label: "Sticky Wall",
-    //     icon: <div className="size-[20px] rounded-sm bg-violet-500"></div>,
-    // },
+    {
+        label: "Calendar",
+        icon: <div className="size-[20px] rounded-sm bg-yellow-500"></div>,
+        count: 29,
+    },
+    {
+        label: "Sticky Wall",
+        icon: <div className="size-[20px] rounded-sm bg-violet-500"></div>,
+    },
 ];
 
 const predefinedColors = [
@@ -56,7 +56,8 @@ function AddGroup({
             <Popper
                 anchorEl={colorPickerEl}
                 open={open}
-                // popperBoundery={document.getElementById("sidebar-wrapper")}
+                placement="right"
+                placementAlignment="center"
             >
                 <HexColorPicker />
             </Popper>

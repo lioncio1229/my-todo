@@ -84,7 +84,7 @@ export default function Sidebar() {
                     <h4 className="py-2 font-medium">LIST</h4>
                     <TaskGroup />
                 </div>
-                {/* <div className="mt-auto">
+                <div className="mt-auto">
                     <ul className="flex flex-col gap-2">
                         {userPreferences.map((item) => (
                             <NavItem
@@ -94,7 +94,7 @@ export default function Sidebar() {
                             />
                         ))}
                     </ul>
-                </div> */}
+                </div>
             </div>
         </nav>
     );
