@@ -92,6 +92,8 @@ export default function Popper({
             const bottomBoundaryExceed = () =>
                 posY + _popperRect.height + overflowOffset > window.innerHeight;
             const topBoundaryExceed = () => posY - overflowOffset < 0;
+            const rightBoundaryExceed = () =>
+                posX + _popperRect.width + overflowOffset > window.innerWidth;
 
             //Check if the popper is outside below the viewport
             if (bottomBoundaryExceed()) {
@@ -126,6 +128,23 @@ export default function Popper({
                     posY,
                     viewportHeight - _popperRect.height - placementOffset,
                 );
+            }
+
+            if (rightBoundaryExceed()) {
+                if (placement === "right") {
+                    posX = calculatePopperRawPosition(
+                        "left",
+                        placementAlignment,
+                    ).posX;
+                } else if (placement === "top" || placement === "bottom") {
+                    posX = calculatePopperRawPosition(placement, "center").posX;
+                    if (rightBoundaryExceed()) {
+                        posX = calculatePopperRawPosition(
+                            placement,
+                            "end",
+                        ).posX;
+                    }
+                }
             }
 
             return { posX, posY };
