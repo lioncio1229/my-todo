@@ -66,12 +66,12 @@ export default function Popper({
 
             if (isVerticalAlign) {
                 if (placementAlignment === "center")
-                    posX -= popperRect.width / 2;
+                    posX -= popperRect.width / 2 - targetRect.width / 2;
                 else if (placementAlignment === "end")
                     posX -= popperRect.width - targetRect.width;
             } else {
                 if (placementAlignment === "center")
-                    posY -= popperRect.height / 2;
+                    posY -= popperRect.height / 2 - targetRect.height / 2;
                 else if (placementAlignment === "end")
                     posY -= popperRect.height - targetRect.height;
             }
