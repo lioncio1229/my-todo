@@ -1,13 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 import NavItem from "./nav-item";
 import Button from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, X, Palette } from "lucide-react";
 import Textfield from "@/components/ui/textfield";
 import { HexColorPicker } from "react-colorful";
 import Popper from "@/components/ui/popper";
+import IconButton from "@/components/ui/icon-button";
+import Card from "@/components/ui/card";
 
 const groupList = [
     {
@@ -44,26 +46,31 @@ const predefinedColors = [
 const defaultColorValue = predefinedColors[0] ?? "#287fff";
 
 function CustomColorPicker({
-    onPick,
-    onCancel,
+    color,
+    onChange,
+    onClose,
 }: {
-    onPick?: (hex: string) => void;
-    onCancel?: () => void;
+    color?: string;
+    onChange?: (hex: string) => void;
+    onClose?: () => void;
 }) {
-    const [color, setColor] = useState("#aabbcc");
-
     return (
-        <div className="rounded-sm bg-white p-1 shadow-sm outline-1 outline-gray-200">
-            <HexColorPicker color={color} onChange={setColor} />
-            <div className="mt-2 flex gap-1">
-                <Button size="small" variant="outlined" onClick={onCancel}>
-                    Cancel
-                </Button>
-                <Button size="small" onClick={() => onPick?.(color)}>
-                    Pick
-                </Button>
-            </div>
-        </div>
+        <Card
+            title="Custom"
+            titleIcon={<Palette size={20} className="text-secondary-text" />}
+            headerAction={
+                <IconButton onClick={onClose}>
+                    <X />
+                </IconButton>
+            }
+            headerPadding="2px 4px"
+        >
+            <HexColorPicker color={color} onChange={onChange} />
+            <div
+                style={{ backgroundColor: color }}
+                className="mt-1 h-8 rounded-sm border border-gray-200"
+            ></div>
+        </Card>
     );
 }
 
@@ -74,8 +81,10 @@ function AddGroup({
     onSave?: (formData: FormData) => void;
     onCancel?: () => void;
 }) {
-    const radioRef = useRef<HTMLInputElement | null>(null);
     const [colorPickerEl, setColorPickerEl] = useState<HTMLElement | null>();
+    const [pickerColor, setPickerColor] = useState("#fff");
+    const [useCustomColor, setUseCustomColor] = useState(false);
+
     const open = Boolean(colorPickerEl);
 
     return (
@@ -87,12 +96,11 @@ function AddGroup({
                 placementAlignment="center"
             >
                 <CustomColorPicker
-                    onPick={(hex) => {
-                        radioRef.current!.value = hex;
-                        radioRef.current!.checked = true;
-                        setColorPickerEl(null);
+                    color={pickerColor}
+                    onChange={(hex) => {
+                        setPickerColor(hex);
                     }}
-                    onCancel={() => setColorPickerEl(null)}
+                    onClose={() => setColorPickerEl(null)}
                 />
             </Popper>
             <form
@@ -119,21 +127,32 @@ function AddGroup({
                                 `size-[20px] cursor-pointer appearance-none rounded-sm checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
                             )}
                             aria-label={`Select color ${color}`}
+                            onClick={() => setUseCustomColor(false)}
                         />
                     ))}
                     <input
-                        ref={radioRef}
                         type="radio"
                         name="color"
+                        value={pickerColor}
+                        style={{
+                            ...(useCustomColor && {
+                                backgroundColor: pickerColor,
+                            }),
+                        }}
                         className={clsx(
-                            `size-[20px] cursor-pointer appearance-none rounded-sm bg-[url(/color-picker.svg)] bg-cover checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
+                            `size-[20px] cursor-pointer appearance-none rounded-sm checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
+                            {
+                                "bg-transparent bg-[url(/color-picker.svg)] bg-cover":
+                                    !useCustomColor,
+                            },
                         )}
                         aria-label={`Color picker`}
-                        onClick={(e) =>
+                        onClick={(e) => {
                             open
                                 ? setColorPickerEl(null)
-                                : setColorPickerEl(e.currentTarget)
-                        }
+                                : setColorPickerEl(e.currentTarget);
+                            setUseCustomColor(true);
+                        }}
                     />
                 </div>
                 <div className="flex items-center justify-end gap-2">

@@ -72,3 +72,11 @@
         top: 0;
     }
 }
+
+.react-colorful__saturation {
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+}
+
+.react-colorful__last-control {
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm) !important;
+}
