@@ -10,6 +10,7 @@ import { HexColorPicker } from "react-colorful";
 import Popper from "@/components/ui/popper";
 import IconButton from "@/components/ui/icon-button";
 import Card from "@/components/ui/card";
+import ClickawayListener from "@/components/ui/clickaway-listener";
 
 const groupList = [
     {
@@ -95,13 +96,17 @@ function AddGroup({
                 placement="right"
                 placementAlignment="center"
             >
-                <CustomColorPicker
-                    color={pickerColor}
-                    onChange={(hex) => {
-                        setPickerColor(hex);
-                    }}
-                    onClose={() => setColorPickerEl(null)}
-                />
+                <ClickawayListener onClickAway={() => setColorPickerEl(null)}>
+                    <div className="block bg-transparent">
+                        <CustomColorPicker
+                            color={pickerColor}
+                            onChange={(hex) => {
+                                setPickerColor(hex);
+                            }}
+                            onClose={() => setColorPickerEl(null)}
+                        />
+                    </div>
+                </ClickawayListener>
             </Popper>
             <form
                 action={onSave}
@@ -121,7 +126,7 @@ function AddGroup({
                             type="radio"
                             name="color"
                             defaultChecked={color === defaultColorValue}
-                            defaultValue={defaultColorValue}
+                            value={color}
                             style={{ backgroundColor: color }}
                             className={clsx(
                                 `size-[20px] cursor-pointer appearance-none rounded-sm checked:shadow-[0_0_0_2px_var(--color-white),0_0_0_4px_var(--color-gray-300)]`,
