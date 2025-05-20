@@ -14,6 +14,7 @@ import IconButton from "../../ui/icon-button";
 import Divider from "../../ui/divider";
 import NavItem from "./nav-item";
 import TaskGroup from "./task-group";
+import Tags from "@/components/tags";
 
 const taskList = [
     {
@@ -83,6 +84,10 @@ export default function Sidebar() {
                 <div>
                     <h4 className="py-2 font-medium">LIST</h4>
                     <TaskGroup />
+                </div>
+                <div>
+                    <h4 className="py-2 font-medium">TAGS</h4>
+                    <Tags />
                 </div>
                 <div className="mt-auto">
                     <ul className="flex flex-col gap-2">

@@ -5,7 +5,9 @@
         "ngClass",
         "class:list",
         ".*classes",
-        ".*class"
+        ".*class",
+        ".*color",
+        ".*colors"
     ],
     "editor.formatOnSave": true
 }

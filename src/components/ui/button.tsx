@@ -62,9 +62,9 @@ export default function Button({
                 "border-1 border-amber-400 text-amber-400 hover:bg-amber-400/10",
             info: "border-1 border-blue-500 text-blue-500 hover:bg-blue-500/10",
             primaryText:
-                "border-1 border-gray-200 text-primary-text hover:bg-gray-100",
+                "border-1 border-gray-300 text-primary-text hover:bg-gray-100",
             secondaryText:
-                "border-1 border-gray-100 text-secondary-text hover:bg-gray-100",
+                "border-1 border-gray-200 text-secondary-text hover:bg-gray-100",
         },
         text: {
             primary: "text-primary-main hover:bg-primary-main/5",
