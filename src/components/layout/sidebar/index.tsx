@@ -11,11 +11,11 @@ import {
     LogOut,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import IconButton from "../../ui/icon-button";
-import Divider from "../../ui/divider";
+import IconButton from "../../common/ui/icon-button";
+import Divider from "../../common/ui/divider";
 import NavItem from "./nav-item";
-import TaskGroup from "./task-group";
-import Tags from "@/components/tags";
+import TaskGroup from "../../common/task-group";
+import Tags from "@/components/common/tags";
 
 const taskList = [
     {
