@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import NavItem from "../layout/sidebar/nav-item";
-import Button from "@/components/common/ui/button";
+import Button from "@/components/common/button";
 import { Plus } from "lucide-react";
 import TitleColorPicker from "@/components/common/title-color-picker";
 

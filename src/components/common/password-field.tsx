@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import Textfield, { TextfieldProps } from "./textfield";
+import Textfield, { TextfieldProps } from "./ui/textfield";
 import IconButton from "./icon-button";
 
 type Props = TextfieldProps & {

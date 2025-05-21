@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Button from "./ui/button";
-import Tag from "./ui/tag";
+import Button from "./button";
+import Tag from "./tag";
 import TitleColorPicker from "./title-color-picker";
 import { Plus } from "lucide-react";
 

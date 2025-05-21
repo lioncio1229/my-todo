@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
-import Button from "@/components/common/ui/button";
-import PasswordField from "@/components/common/ui/password-field";
+import Button from "@/components/common/button";
+import PasswordField from "@/components/common/password-field";
 
 export default function Page() {
     return (
