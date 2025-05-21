@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import {
     Menu,
     ChevronsRight,
@@ -54,19 +55,44 @@ const userPreferences = [
 ];
 
 export default function Sidebar() {
+    const navRef = useRef<HTMLElement | null>(null);
+    const headerRef = useRef<HTMLDivElement | null>(null);
     const pathname = usePathname();
 
+    useEffect(() => {
+        const navEl = navRef.current!;
+        const headerEl = headerRef.current!;
+
+        const handleScroll = () => {
+            if (navEl.scrollTop > 0)
+                headerEl.style.borderBottom = `1px solid var(--color-gray-200)`;
+            else headerEl.style.borderBottom = "none";
+        };
+
+        navEl.addEventListener("scroll", handleScroll);
+
+        return () => {
+            navEl.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
-        <nav className="h-full w-full overflow-auto rounded-lg border-1 border-gray-200 bg-linear-45 from-[#F3F4F6]/0 to-[#FBFDFF] p-4">
-            <div className="flex h-full w-full flex-col gap-2">
-                <div className="flex justify-between">
+        <nav
+            ref={navRef}
+            className="h-full w-full overflow-auto rounded-lg border-1 border-gray-200 bg-linear-45 from-[#F3F4F6]/0 to-[#FBFDFF] p-4 pt-0"
+        >
+            <div className="relative flex h-full w-full flex-col gap-2">
+                <div
+                    ref={headerRef}
+                    className="sticky top-0 flex justify-between bg-[#FBFDFF] py-4"
+                >
                     <h2 className="font-semibold">Menu</h2>
                     <IconButton>
                         <Menu className="text-secondary-text" />
                     </IconButton>
                 </div>
                 <div>
-                    <h4 className="py-2 font-medium">TASK</h4>
+                    <h4 className="pb-2 font-medium">TASK</h4>
                     <ul className="flex flex-col gap-2">
                         {taskList.map((item) => (
                             <NavItem
