@@ -58,10 +58,7 @@ export default function Sidebar() {
 
     return (
         <nav className="h-full w-full overflow-auto rounded-lg border-1 border-gray-200 bg-linear-45 from-[#F3F4F6]/0 to-[#FBFDFF] p-4">
-            <div
-                id="sidebar-wrapper"
-                className="flex h-full w-full flex-col gap-6"
-            >
+            <div className="flex h-full w-full flex-col gap-2">
                 <div className="flex justify-between">
                     <h2 className="font-semibold">Menu</h2>
                     <IconButton>
@@ -85,6 +82,7 @@ export default function Sidebar() {
                     <h4 className="py-2 font-medium">LIST</h4>
                     <TaskGroup />
                 </div>
+                <Divider />
                 <div>
                     <h4 className="py-2 font-medium">TAGS</h4>
                     <Tags />
