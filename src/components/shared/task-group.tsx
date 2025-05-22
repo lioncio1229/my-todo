@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import NavItem from "../layout/sidebar/nav-item";
-import Button from "@/components/common/button";
+import Button from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import TitleColorPicker from "@/components/common/title-color-picker";
+import TitleColorPicker from "@/components/shared/title-color-picker";
 
 const groupList = [
     {

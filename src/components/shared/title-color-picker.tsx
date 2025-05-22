@@ -1,13 +1,13 @@
 import { useState } from "react";
 import clsx from "clsx";
-import Button from "@/components/common/button";
+import Button from "@/components/ui/button";
 import { X, Palette } from "lucide-react";
-import Textfield from "@/components/common/textfield";
+import Textfield from "@/components/ui/textfield";
 import { HexColorPicker } from "react-colorful";
-import Popper from "@/components/common/popper";
-import IconButton from "@/components/common/icon-button";
-import Card from "@/components/common/card";
-import ClickawayListener from "@/components/common/clickaway-listener";
+import Popper from "@/components/ui/popper";
+import IconButton from "@/components/ui/icon-button";
+import Card from "@/components/ui/card";
+import ClickawayListener from "@/components/ui/clickaway-listener";
 
 const predefinedColors = [
     "#fb2d32",
