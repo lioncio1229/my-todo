@@ -14,7 +14,7 @@ export default function ClickawayListener({ onClickAway, children }: Props) {
 
         const refreshStack = () => {
             stack = [];
-            let currentNode = ref.current as HTMLElement;
+            const currentNode = ref.current as HTMLElement;
             const tempStack: HTMLElement[] = [currentNode];
 
             do {
@@ -39,7 +39,9 @@ export default function ClickawayListener({ onClickAway, children }: Props) {
                 return;
             }
 
-            !stack.includes(e.target as HTMLElement) && onClickAway?.();
+            if (!stack.includes(e.target as HTMLElement)) {
+                onClickAway?.();
+            }
         };
 
         const observer = new MutationObserver((mutationList) => {

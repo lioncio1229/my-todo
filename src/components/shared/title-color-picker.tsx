@@ -75,15 +75,13 @@ export default function TitleColorPicker({
                 placementAlignment="center"
             >
                 <ClickawayListener onClickAway={() => setColorPickerEl(null)}>
-                    <div className="block bg-transparent">
-                        <CustomColorPicker
-                            color={pickerColor}
-                            onChange={(hex) => {
-                                setPickerColor(hex);
-                            }}
-                            onClose={() => setColorPickerEl(null)}
-                        />
-                    </div>
+                    <CustomColorPicker
+                        color={pickerColor}
+                        onChange={(hex) => {
+                            setPickerColor(hex);
+                        }}
+                        onClose={() => setColorPickerEl(null)}
+                    />
                 </ClickawayListener>
             </Popper>
             <form
@@ -132,9 +130,8 @@ export default function TitleColorPicker({
                         )}
                         aria-label={`Color picker`}
                         onClick={(e) => {
-                            open
-                                ? setColorPickerEl(null)
-                                : setColorPickerEl(e.currentTarget);
+                            if (open) setColorPickerEl(null);
+                            else setColorPickerEl(e.currentTarget);
                             setUseCustomColor(true);
                         }}
                     />

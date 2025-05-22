@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
-import Button from "@/components/common/button";
-import Textfield from "@/components/common/textfield";
-import PasswordField from "@/components/common/password-field";
+import Button from "@/components/ui/button";
+import Textfield from "@/components/ui/textfield";
+import PasswordField from "@/components/ui/password-field";
 
 export default function Page() {
     return (
@@ -59,7 +59,7 @@ export default function Page() {
                 <div>
                     <Button type="submit">Login</Button>
                     <p className="text-secondary-text pt-4 text-sm">
-                        Don't have an account yet?{" "}
+                        Don&apos;t have an account yet?{" "}
                         <Link
                             href="/signup"
                             className="text-secondary-dark pl-1 font-medium hover:underline"

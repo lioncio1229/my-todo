@@ -192,7 +192,7 @@ export default function Popper({
             _viewportWidthTemp = viewportWidth;
             _viewportHeightTemp = viewportHeight;
 
-            let { posX, posY } = calculatePopperRawPosition(
+            const { posX, posY } = calculatePopperRawPosition(
                 placement,
                 placementAlignment,
             );
@@ -211,7 +211,7 @@ export default function Popper({
         return () => {
             cancelAnimationFrame(_animationId);
         };
-    }, [anchorEl]);
+    }, [anchorEl, placement, placementAlignment, placementOffset]);
 
     return createPortal(
         <div
