@@ -13,7 +13,7 @@ export default function TodaysTaskCardAnalytics({
     completed = 4,
 }: Props) {
     return (
-        <Paper className="flex gap-2 p-3">
+        <Paper className="flex h-full w-full justify-between gap-4 p-3">
             <div>
                 <h3 className="mb-2 font-medium">Today's Task</h3>
                 <table className="cell:px-4 cell:py-2 text-secondary-text cell:font-normal cell:text-center w-full">
@@ -41,6 +41,8 @@ export default function TodaysTaskCardAnalytics({
                         padding: {
                             top: -20,
                             bottom: -25,
+                            left: -25,
+                            right: -25,
                         },
                     },
                     plotOptions: {
@@ -66,8 +68,8 @@ export default function TodaysTaskCardAnalytics({
                 }}
                 series={[Math.round((active / (active + completed)) * 100)]}
                 type="radialBar"
-                width={170}
-                height={170}
+                width={120}
+                height={120}
             />
         </Paper>
     );

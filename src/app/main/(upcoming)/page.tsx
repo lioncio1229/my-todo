@@ -1,5 +1,6 @@
 import Image from "next/image";
 import TodaysTaskCardAnalytics from "./components/todays-task-card-analytics";
+import OverdueTaskCard from "./components/overdue-task-card";
 
 export default function Page() {
     return (
@@ -18,8 +19,13 @@ export default function Page() {
                     />
                 </div>
             </div>
-            <div className="flex">
-                <TodaysTaskCardAnalytics />
+            <div className="flex gap-4">
+                <div>
+                    <TodaysTaskCardAnalytics />
+                </div>
+                <div className="basis-100">
+                    <OverdueTaskCard />
+                </div>
             </div>
         </>
     );
