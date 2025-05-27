@@ -2,6 +2,8 @@ import Image from "next/image";
 import TodaysTaskCardAnalytics from "./components/todays-task-card-analytics";
 import OverdueTaskCard from "./components/overdue-task-card";
 
+import TodoItem from "@/components/shared/todo-item";
+
 export default function Page() {
     return (
         <>
@@ -27,6 +29,10 @@ export default function Page() {
                     <OverdueTaskCard />
                 </div>
             </div>
+            <TodoItem
+                name="Creating something that is todo"
+                group={{ name: "Work", color: "#00b7fd" }}
+            />
         </>
     );
 }
