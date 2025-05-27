@@ -33,6 +33,7 @@ function CustomColorPicker({
 }) {
     return (
         <Card
+            elevation={4}
             title="Custom"
             titleIcon={<Palette size={20} className="text-secondary-text" />}
             headerAction={

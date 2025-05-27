@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant cell (& :where(th,td));
 
 @theme {
     --color-primary-main: #0b6dc5;
