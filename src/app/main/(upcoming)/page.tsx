@@ -1,8 +1,10 @@
 import Image from "next/image";
 import TodaysTaskCardAnalytics from "./components/todays-task-card-analytics";
 import OverdueTaskCard from "./components/overdue-task-card";
-
+import SectionCard from "./components/section-card";
+import Innercard from "./components/inner-card";
 import TodoItem from "@/components/shared/todo-item";
+import TodoList from "@/components/shared/todo-list";
 
 export default function Page() {
     return (
@@ -29,10 +31,46 @@ export default function Page() {
                     <OverdueTaskCard />
                 </div>
             </div>
-            <TodoItem
-                name="Creating something that is todo"
-                group={{ name: "Work", color: "#00b7fd" }}
-            />
+            <SectionCard title={<h3 className="font-medium">Today</h3>}>
+                <div className="flex gap-4">
+                    <div className="grow">
+                        <Innercard title="Task">
+                            <TodoList
+                                list={[
+                                    {
+                                        name: "Creating something that is todo",
+                                        date: "All day",
+                                        substasks: 5,
+                                        group: {
+                                            name: "Work",
+                                            color: "#02b6f9",
+                                        },
+                                        checked: true,
+                                    },
+                                    {
+                                        name: "Creating something that is todo",
+                                        date: "All day",
+                                        substasks: 5,
+                                        group: {
+                                            name: "Work",
+                                            color: "#02b6f9",
+                                        },
+                                    },
+                                    {
+                                        name: "Creating something that is todo",
+                                        date: "All day",
+                                        substasks: 5,
+                                        group: {
+                                            name: "Work",
+                                            color: "#02b6f9",
+                                        },
+                                    },
+                                ]}
+                            />
+                        </Innercard>
+                    </div>
+                </div>
+            </SectionCard>
         </>
     );
 }

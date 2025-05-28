@@ -38,7 +38,7 @@ export default function NavItem({
                 {count && (
                     <div
                         className={clsx(
-                            "rounded-sm bg-gray-300 px-3 py-1 text-xs font-semibold",
+                            "rounded-sm bg-gray-300 px-3 py-[2px] text-xs font-semibold",
                             {
                                 "bg-white": active,
                             },
