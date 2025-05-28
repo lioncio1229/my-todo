@@ -3,7 +3,7 @@ import Button from "@/components/ui/button";
 import { CalendarDays } from "lucide-react";
 
 type Props = {
-    title?: React.ReactNode;
+    title?: string;
     childrenPadding?: string;
     children?: React.ReactNode;
 };
@@ -15,7 +15,7 @@ export default function SectionCard({
 }: Props) {
     return (
         <Card
-            title={title}
+            title={<h2 className="font-bold">{title}</h2>}
             headerPadding="12px"
             childrenPadding={childrenPadding}
             headerBorder={false}

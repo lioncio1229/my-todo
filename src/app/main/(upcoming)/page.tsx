@@ -31,7 +31,7 @@ export default function Page() {
                     <OverdueTaskCard />
                 </div>
             </div>
-            <SectionCard title={<h3 className="font-medium">Today</h3>}>
+            <SectionCard title="Today">
                 <div className="flex gap-4">
                     <div className="grow">
                         <Innercard title="Tasks">

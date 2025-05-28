@@ -10,7 +10,7 @@ type Props = {
 export default function Innercard({ title, children }: Props) {
     return (
         <Card
-            title={title}
+            title={<h3 className="font-medium">{title}</h3>}
             headerPadding="12px"
             childrenPadding="12px"
             headerBorder={false}
@@ -18,9 +18,8 @@ export default function Innercard({ title, children }: Props) {
                 <Button
                     variant="text"
                     color="secondaryText"
-                    size="small"
                     fullWidth={false}
-                    startIcon={<Plus size={16} />}
+                    startIcon={<Plus />}
                 >
                     Add new task
                 </Button>
