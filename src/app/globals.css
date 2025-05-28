@@ -72,6 +72,9 @@
         position: absolute;
         top: 0;
     }
+    &:not(:checked):hover {
+        border-color: var(--color-gray-300);
+    }
 }
 
 .react-colorful__saturation {
