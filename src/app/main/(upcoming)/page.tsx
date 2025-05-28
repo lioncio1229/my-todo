@@ -3,8 +3,8 @@ import TodaysTaskCardAnalytics from "./components/todays-task-card-analytics";
 import OverdueTaskCard from "./components/overdue-task-card";
 import SectionCard from "./components/section-card";
 import Innercard from "./components/inner-card";
-import TodoItem from "@/components/shared/todo-item";
 import TodoList from "@/components/shared/todo-list";
+import EventList from "@/components/shared/event-list";
 
 export default function Page() {
     return (
@@ -34,7 +34,7 @@ export default function Page() {
             <SectionCard title={<h3 className="font-medium">Today</h3>}>
                 <div className="flex gap-4">
                     <div className="grow">
-                        <Innercard title="Task">
+                        <Innercard title="Tasks">
                             <TodoList
                                 list={[
                                     {
@@ -59,6 +59,43 @@ export default function Page() {
                                     {
                                         name: "Creating something that is todo",
                                         date: "All day",
+                                        substasks: 5,
+                                        group: {
+                                            name: "Work",
+                                            color: "#02b6f9",
+                                        },
+                                    },
+                                ]}
+                            />
+                        </Innercard>
+                    </div>
+                    <div className="grow">
+                        <Innercard title="Events">
+                            <EventList
+                                list={[
+                                    {
+                                        name: "Creating something that is todo",
+                                        date: "12pm to 1:30",
+                                        substasks: 5,
+                                        group: {
+                                            name: "Work",
+                                            color: "#02b6f9",
+                                        },
+                                        status: "occurred",
+                                    },
+                                    {
+                                        name: "Creating something that is todo",
+                                        date: "3pm to 7pm - Now",
+                                        substasks: 5,
+                                        group: {
+                                            name: "Work",
+                                            color: "#ffbb00",
+                                        },
+                                        status: "running",
+                                    },
+                                    {
+                                        name: "Creating something that is todo",
+                                        date: "7pm to 8pm",
                                         substasks: 5,
                                         group: {
                                             name: "Work",

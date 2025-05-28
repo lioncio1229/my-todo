@@ -3,10 +3,18 @@ export type GroupType = {
     color?: string;
 };
 
-export type TodoItemType = {
+export type ItemType = {
+    id?: string;
     name?: string;
-    checked?: boolean;
     substasks?: number;
     date?: string;
     group?: GroupType;
+};
+
+export type TodoItemType = ItemType & {
+    checked?: boolean;
+};
+
+export type EventItemType = ItemType & {
+    status?: "occurred" | "pending" | "running";
 };

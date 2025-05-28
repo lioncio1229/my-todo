@@ -5,15 +5,18 @@ import { Clock, ChevronRight } from "lucide-react";
 import type { TodoItemType } from "@/types";
 
 type Props = TodoItemType & {
+    onClick?: (id?: string) => void;
     onChange?: (checked: boolean) => void;
 };
 
 export default function TodoItem({
+    id,
     name,
     checked,
     substasks = 10,
     date = "All day",
     group,
+    onClick,
     onChange,
 }: Props) {
     return (
@@ -25,7 +28,10 @@ export default function TodoItem({
                 checked={checked}
                 onChange={(e) => onChange?.(e.target.checked)}
             />
-            <div className="group flex grow cursor-pointer items-center justify-between gap-3">
+            <div
+                className="group flex grow cursor-pointer items-center justify-between gap-3"
+                onClick={() => onClick?.(id)}
+            >
                 <div className="space-y-2">
                     <div
                         className={clsx({
